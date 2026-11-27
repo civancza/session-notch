@@ -2,7 +2,8 @@ import AppKit
 import Combine
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
-    private let store = AgentStore()
+    private let store = CommandLine.arguments.contains("--demo")
+        ? AgentStore(providers: [DemoProvider()]) : AgentStore()
     private var overlays: [ScreenOverlay] = []
     private var cancellables = Set<AnyCancellable>()
 
